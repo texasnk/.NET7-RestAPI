@@ -1,3 +1,6 @@
+using RestWithASPNETUdemy.Services;
+using RestWithASPNETUdemy.Services.Implementations;
+
 namespace RestWithASPNETUdemy
 {
     public class Program
@@ -9,6 +12,8 @@ namespace RestWithASPNETUdemy
             // Add services to the container.
 
             builder.Services.AddControllers();
+            //Dependency injection
+            builder.Services.AddScoped<IPersonService, PersonServiceImplementation>();
 
             var app = builder.Build();
 
