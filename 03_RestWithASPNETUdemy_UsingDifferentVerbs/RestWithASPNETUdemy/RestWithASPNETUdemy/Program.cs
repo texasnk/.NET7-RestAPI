@@ -19,6 +19,9 @@ namespace RestWithASPNETUdemy
 
             builder.Services.AddControllers();
 
+            //
+            builder.Services.AddApiVersioning();
+
             var connection = builder.Configuration["MySqlConnection:MysqlConnectionString"];
             builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql
             (connection, new MySqlServerVersion(new Version(8, 0, 25))));
