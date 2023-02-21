@@ -7,34 +7,33 @@ using RestWithASPNETUdemy.Repository.Implementations;
 using Serilog;
 using Microsoft.EntityFrameworkCore.Migrations;
 using EvolveDb;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace RestWithASPNETUdemy
 {
     public class Program
-    {      
-        public static IWebHostEnvironment environment { get; }
+    {
+   
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
 
-            //
-            var Environment = environment;
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
-            //
-     
-            
+
             // Add services to the container.
 
             builder.Services.AddControllers();
 
             //
             builder.Services.AddApiVersioning();
-            var connection = builder.Configuration["MySqlC onnection:MysqlConnectionString"];
+            var connection = builder.Configuration["MySqlConnection:MysqlConnectionString"];
             builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql
             (connection, new MySqlServerVersion(new Version(8, 0, 25))));
-            if (Environment.IsDevelopment())
+
+            if (builder.Environment.IsDevelopment())
             {
                 MigrationDataBase(connection);
             }
