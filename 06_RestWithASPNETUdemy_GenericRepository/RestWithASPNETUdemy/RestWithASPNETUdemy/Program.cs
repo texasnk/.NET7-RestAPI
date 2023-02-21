@@ -8,6 +8,7 @@ using Serilog;
 using Microsoft.EntityFrameworkCore.Migrations;
 using EvolveDb;
 using Microsoft.EntityFrameworkCore.Storage;
+using RestWithASPNETUdemy.Repository.Generic;
 
 namespace RestWithASPNETUdemy
 {
@@ -42,7 +43,7 @@ namespace RestWithASPNETUdemy
             builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            builder.Services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
             var app = builder.Build();
 
