@@ -17,7 +17,7 @@ namespace RestWithASPNETUdemy.Hypermedia
             }
             set { href = value; } }
         public string Type { get; set; }
-        public string TAction { get; set; }
+        public string Action { get; set; }
 
     }
 }

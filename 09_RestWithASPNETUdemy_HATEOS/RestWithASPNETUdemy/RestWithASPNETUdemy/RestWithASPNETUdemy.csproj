@@ -17,8 +17,4 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="HyperMedia\" />
-  </ItemGroup>
-
 </Project>

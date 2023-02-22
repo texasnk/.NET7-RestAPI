@@ -1,4 +1,5 @@
-﻿using RestWithASPNETUdemy.Model;
+﻿using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Model;
 
 namespace RestWithASPNETUdemy.Business
 {

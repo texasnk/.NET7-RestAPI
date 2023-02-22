@@ -4,12 +4,11 @@ using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Business.Implementations;
 using RestWithASPNETUdemy.Repository;
 using Serilog;
-using Microsoft.EntityFrameworkCore.Migrations;
 using EvolveDb;
-using Microsoft.EntityFrameworkCore.Storage;
 using RestWithASPNETUdemy.Repository.Generic;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using RestWithASPNETUdemy.Hypermedia.Filters;
+using RestWithASPNETUdemy.Hypermedia.Enricher;
 
 namespace RestWithASPNETUdemy
 {
@@ -46,6 +45,16 @@ namespace RestWithASPNETUdemy
                 MigrationDataBase(connection);
             }
 
+            var filterOptions = new HypermediaFilterOptions();
+
+            filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+            filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
+
+
+            builder.Services.AddSingleton(filterOptions);
+
+          
+
             //Dependency injection
             builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
@@ -57,8 +66,14 @@ namespace RestWithASPNETUdemy
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
             app.UseAuthorization();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
+            });
 
             app.MapControllers();
 

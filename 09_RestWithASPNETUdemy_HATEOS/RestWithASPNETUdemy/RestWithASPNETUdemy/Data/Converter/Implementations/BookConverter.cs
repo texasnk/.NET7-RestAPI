@@ -9,11 +9,13 @@ namespace RestWithASPNETUdemy.Data.Converter.Implementations
         public Book Parse(BookVO origin)
         {
             if (origin == null) return null;
-            return new Book{
+            return new Book
+            {
                 id = origin.id,
-                NameBook = origin.NameBook,
+                NameBook= origin.NameBook,
                 Genre = origin.Genre,
                 Publisher = origin.Publisher,
+               
             };
         }
 

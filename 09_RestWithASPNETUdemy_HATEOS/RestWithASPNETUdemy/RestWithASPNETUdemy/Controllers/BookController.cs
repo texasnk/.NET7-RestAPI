@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RestWithASPNETUdemy.Business;
+using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Hypermedia.Filters;
 using RestWithASPNETUdemy.Model;
 
 namespace RestWithASPNETUdemy.Controllers
@@ -22,6 +24,8 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HypermediaFilter))]
+
         public IActionResult Get()
         {
 
@@ -29,6 +33,8 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HypermediaFilter))]
+
         public IActionResult Get(long id)
         {
             var book = _bookBusiness.FindById(id);
@@ -39,6 +45,8 @@ namespace RestWithASPNETUdemy.Controllers
             return Ok(book);
         }
         [HttpPost]
+        [TypeFilter(typeof(HypermediaFilter))]
+
         public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null)
@@ -48,6 +56,8 @@ namespace RestWithASPNETUdemy.Controllers
             return Ok(_bookBusiness.Create(book));
         }
         [HttpPut]
+        [TypeFilter(typeof(HypermediaFilter))]
+
         public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null)
