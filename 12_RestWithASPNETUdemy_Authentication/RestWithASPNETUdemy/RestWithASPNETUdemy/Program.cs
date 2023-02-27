@@ -11,6 +11,14 @@ using RestWithASPNETUdemy.Hypermedia.Filters;
 using RestWithASPNETUdemy.Hypermedia.Enricher;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Rewrite;
+using RestWithASPNETUdemy.Services;
+using RestWithASPNETUdemy.Services.Implementations;
+using RestWithASPNETUdemy.Configurations;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestWithASPNETUdemy
 {
@@ -34,10 +42,47 @@ namespace RestWithASPNETUdemy
                 options.RespectBrowserAcceptHeader = true;
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
                 options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+
             }).AddXmlSerializerFormatters();
 
             //
+
+            var tokenConfigurations = new TokenConfiguration();
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                builder.Configuration.GetSection("TokenConfigurations")
+                ).Configure(tokenConfigurations);
+
+            builder.Services.AddSingleton(tokenConfigurations);
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = tokenConfigurations.Issuer,
+                    ValidAudience = tokenConfigurations.Audience,
+                    IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfigurations.Secret))
+                };
+            });
+
+            builder.Services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
+
+            //
+
             builder.Services.AddApiVersioning();
+
             var connection = builder.Configuration["MySqlConnection:MysqlConnectionString"];
             builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql
             (connection, new MySqlServerVersion(new Version(8, 0, 25))));
@@ -60,7 +105,14 @@ namespace RestWithASPNETUdemy
             //Dependency injection
             builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
+            builder.Services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+
+            builder.Services.AddTransient<ITokenService, TokenService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
             builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
 
             builder.Services.AddSwaggerGen(c =>
             {
