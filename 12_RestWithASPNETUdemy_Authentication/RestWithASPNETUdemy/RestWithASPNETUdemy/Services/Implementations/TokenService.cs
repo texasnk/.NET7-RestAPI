@@ -19,7 +19,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
         public string GenerateAccessToken(IEnumerable<Claim> claims)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.Secret));
-            var signinCredentials = new SigningCredentials(secretKey,SecurityAlgorithms.HmacSha256);
+            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
             var options = new JwtSecurityToken(
                 issuer: _configuration.Issuer,
@@ -27,7 +27,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(_configuration.Minutes),
                 signingCredentials: signinCredentials
-                );
+            );
             string tokenString = new JwtSecurityTokenHandler().WriteToken(options);
             return tokenString;
         }
@@ -42,7 +42,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
             };
         }
 
-        public ClaimsPrincipal GetPrincipalFromExpireToken(string token)
+        public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
             var tokenValidationParameters = new TokenValidationParameters
             {
@@ -51,17 +51,18 @@ namespace RestWithASPNETUdemy.Services.Implementations
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.Secret)),
                 ValidateLifetime = false
-        };
+            };
             var tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken securityToken;
 
             var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
             var jwtSecurityToken = securityToken as JwtSecurityToken;
-            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg
-                .Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCulture))
-            {
-                throw new SecurityTokenException("Invalid Token!");
-            }
+            if (jwtSecurityToken == null ||
+                !jwtSecurityToken.Header.Alg.Equals(
+                    SecurityAlgorithms.HmacSha256,
+                    StringComparison.InvariantCulture))
+                throw new SecurityTokenException("Invalid Token");
+
             return principal;
         }
     }

@@ -7,7 +7,7 @@ namespace RestWithASPNETUdemy.Services
         string GenerateAccessToken(IEnumerable<Claim> claims);
         string GenerateRefreshToken();
 
-        ClaimsPrincipal GetPrincipalFromExpireToken(string token);
+        ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
 
     }
 }

@@ -24,7 +24,7 @@ namespace RestWithASPNETUdemy.Controllers
             if (user == null) return BadRequest("Invalid client request");
             var token = _loginBusiness.ValidateCredentials(user);
             if (token == null) return Unauthorized();
-            return Ok(user);
+            return Ok(token);
         }
     }
 }
