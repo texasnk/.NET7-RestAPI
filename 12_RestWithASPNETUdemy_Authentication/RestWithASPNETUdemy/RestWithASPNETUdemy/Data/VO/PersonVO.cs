@@ -11,7 +11,7 @@ namespace RestWithASPNETUdemy.Data.VO
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-        [JsonIgnore]
+    
         public string Address { get; set; }
 
         public string Gender { get; set; }
