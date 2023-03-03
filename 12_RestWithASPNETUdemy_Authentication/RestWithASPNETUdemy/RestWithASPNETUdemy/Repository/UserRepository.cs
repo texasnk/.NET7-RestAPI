@@ -1,4 +1,5 @@
-﻿using RestWithASPNETUdemy.Data.VO;
+﻿using RestWithASPNETUdemy.Configurations;
+using RestWithASPNETUdemy.Data.VO;
 using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Model.Context;
 using System.Linq;
@@ -19,11 +20,22 @@ namespace RestWithASPNETUdemy.Repository
         public User ValidateCredentials(UserVO user)
         {
             var pass = ComputeHash(user.Password, new SHA256CryptoServiceProvider());
-            return _context.Users.FirstOrDefault(u=>(u.UserName==user.UserName)&&(u.Password==pass));
-        } 
+
+            return _context.Users.FirstOrDefault(u => (u.UserName == user.UserName) && (u.Password == pass));
+        }
         public User ValidateCredentials(string userName)
         {
             return _context.Users.SingleOrDefault(u => (u.UserName == userName));
+        }
+        public bool RevokeToken(string userName)
+        {
+            var user = _context.Users.SingleOrDefault(u => (u.UserName == userName));
+            if (user is null) return false;
+            user.RefreshToken = "0";
+            TokenConfiguration token = new TokenConfiguration();
+            _context.SaveChanges();
+
+            return true;
         }
         public User RefreshUserInfo(User user)
         {
@@ -53,7 +65,5 @@ namespace RestWithASPNETUdemy.Repository
 
             return BitConverter.ToString(hashedBytes);
         }
-
-      
     }
 }
