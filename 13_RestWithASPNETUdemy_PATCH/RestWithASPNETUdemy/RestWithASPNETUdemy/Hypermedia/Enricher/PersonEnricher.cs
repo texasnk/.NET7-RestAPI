@@ -36,6 +36,13 @@ namespace RestWithASPNETUdemy.Hypermedia.Enricher
             });
             content.Links.Add(new HypermediaLink()
             {
+                Action = HTTPActionVerb.PATCH,
+                Href = link,
+                Rel = RelationType.self,
+                Type = ResponseTypeFormat.DefaultPatch
+            });
+            content.Links.Add(new HypermediaLink()
+            {
                 Action = HTTPActionVerb.GET,
                 Href = link,
                 Rel = RelationType.self,
