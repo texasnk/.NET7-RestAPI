@@ -180,6 +180,7 @@ namespace RestWithASPNETUdemy
                 {
                     Locations = new List<string> { "db/migrations", "db/dataset" }, IsEraseDisabled = true,
                 };
+                evolve.OutOfOrder = true;
                 evolve.Migrate();
             }
             catch (Exception ex)
