@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace RestWithASPNETUdemy
 {
@@ -100,12 +101,15 @@ namespace RestWithASPNETUdemy
 
             builder.Services.AddSingleton(filterOptions);
 
-          
+
 
             //Dependency injection
+            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
             builder.Services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+            builder.Services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
             builder.Services.AddTransient<ITokenService, TokenService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -113,7 +117,6 @@ namespace RestWithASPNETUdemy
 
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-
 
             builder.Services.AddSwaggerGen(c =>
             {
