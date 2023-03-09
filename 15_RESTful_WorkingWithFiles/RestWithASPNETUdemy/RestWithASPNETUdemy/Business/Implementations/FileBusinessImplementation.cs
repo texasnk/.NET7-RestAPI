@@ -18,9 +18,15 @@ namespace RestWithASPNETUdemy.Business.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> file)
+        public async Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> files)
         {
-            throw new NotImplementedException();
+
+            List<FileDetailVO> list = new List<FileDetailVO>();
+            foreach (var item in files)
+            {
+                list.Add(await SaveFileToDisk(item));
+            }
+            return list;
         }
 
         public async Task<FileDetailVO> SaveFileToDisk(IFormFile file)
