@@ -88,10 +88,10 @@ namespace RestWithASPNETUdemy
             builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql
             (connection, new MySqlServerVersion(new Version(8, 0, 25))));
 
-            if (builder.Environment.IsDevelopment())
-            {
-                MigrationDataBase(connection);
-            }
+            //if (builder.Environment.IsDevelopment())
+            //{
+            //    MigrationDataBase(connection);
+            //}
 
             var filterOptions = new HypermediaFilterOptions();
 
