@@ -122,7 +122,7 @@ namespace RestWithASPNETUdemy
             {
                 c.SwaggerDoc("v1.0", new OpenApiInfo
                 {
-                    Title = "RestAPI with ASP .NET Core",
+                    Title = "RestAPI with ASP .NET Core - Foo Bar",
                     Version = "v1.0",
                     Description = "API RESTful developed for studies",
                     Contact = new OpenApiContact
