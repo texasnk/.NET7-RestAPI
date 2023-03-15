@@ -1,3 +1,3 @@
 # RestWithASP-NET5
 
-[![Build Status](https://app.travis-ci.com/texasnk/RestWithASP-NET5.svg?branch=main)](https://app.travis-ci.com/texasnk/RestWithASP-NET5)
+[![Integration with GitHub Actions](https://github.com/texasnk/RestWithASP-NET5/actions/workflows/docker-image.yml/badge.svg)](https://github.com/texasnk/RestWithASP-NET5/actions/workflows/docker-image.yml)
