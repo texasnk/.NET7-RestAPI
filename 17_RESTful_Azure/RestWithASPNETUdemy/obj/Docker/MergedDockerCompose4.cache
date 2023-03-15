@@ -1,0 +1,16 @@
+name: dockercompose5870925520971187758
+services:
+  db:
+    image: rest-with-aspnet-db
+    networks:
+      default: null
+  rest-with-aspnet:
+    build:
+      context: C:\RestWithASP-NET5Udemy\RestWithASP-NET5Udemy\15_RESTful_WorkingWithFiles\RestWithASPNETUdemy
+      dockerfile: RestWithASPNETUdemy/Dockerfile
+    image: restwithaspnetudemy
+    networks:
+      default: null
+networks:
+  default:
+    name: dockercompose5870925520971187758_default
