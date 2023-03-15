@@ -85,19 +85,11 @@ namespace RestWithASPNETUdemy
             builder.Services.AddApiVersioning();
 
             var connection = builder.Configuration["MySqlConnection:MysqlConnectionString"];
-    
 
-            builder.Services.AddDbContextPool<MySQLContext>(options =>
-            {
-                options.UseMySql(
-                    connection,
-                    new MySqlServerVersion(new Version(8, 0, 25)),
-                    options => options.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: System.TimeSpan.FromSeconds(30),
-                        errorNumbersToAdd: null)
-                    );
-            });
+
+            builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql
+             (connection, new MySqlServerVersion(new Version(8, 0, 25))));
+
 
             //if (builder.Environment.IsDevelopment())
             //{
