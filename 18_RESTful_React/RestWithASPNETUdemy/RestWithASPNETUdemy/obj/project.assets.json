@@ -4370,11 +4370,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\14_RestWithASPNETUdemy_Query\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
+      "projectUniqueName": "C:\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\18_RESTful_React\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
       "projectName": "RestWithASPNETUdemy",
-      "projectPath": "C:\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\14_RestWithASPNETUdemy_Query\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
+      "projectPath": "C:\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\18_RESTful_React\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
       "packagesPath": "C:\\Users\\rdavi\\.nuget\\packages\\",
-      "outputPath": "C:\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\14_RestWithASPNETUdemy_Query\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\obj\\",
+      "outputPath": "C:\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\18_RESTful_React\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

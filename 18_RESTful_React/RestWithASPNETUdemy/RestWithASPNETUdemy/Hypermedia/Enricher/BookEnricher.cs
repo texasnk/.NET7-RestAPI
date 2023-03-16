@@ -12,7 +12,7 @@ namespace RestWithASPNETUdemy.Hypermedia.Enricher
         protected override Task EnrichModel(BookVO content, IUrlHelper urlHelper)
         {
             var path = "api/book";
-            string link = GetLink(content.id, urlHelper, path);
+            string link = GetLink(content.Id, urlHelper, path);
 
             content.Links.Add(new HypermediaLink()
             {

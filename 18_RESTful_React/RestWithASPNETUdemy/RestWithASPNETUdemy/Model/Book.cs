@@ -3,14 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestWithASPNETUdemy.Model
 {
-    [Table("book")]
+    [Table("books")]
     public class Book : BaseEntity
     {
-        [Column("book_name")]
-        public string NameBook { get; set; }
-        [Column("genre")]
-        public string Genre { get; set; }
-        [Column("publisher")]
-        public string Publisher { get; set; }
+        [Column("title")]
+        public string Title { get; set; }
+
+        [Column("author")]
+        public string Author { get; set; }
+
+        [Column("price")]
+        public decimal Price { get; set; }
+
+        [Column("launch_date")]
+        public DateTime LaunchDate { get; set; }
     }
 }

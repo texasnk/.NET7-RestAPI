@@ -11,11 +11,11 @@ namespace RestWithASPNETUdemy.Data.Converter.Implementations
             if (origin == null) return null;
             return new Book
             {
-                id = origin.id,
-                NameBook= origin.NameBook,
-                Genre = origin.Genre,
-                Publisher = origin.Publisher,
-               
+                id = origin.Id,
+                Author = origin.Author,
+                LaunchDate = origin.LaunchDate,
+                Price = origin.Price,
+                Title = origin.Title
             };
         }
 
@@ -24,12 +24,14 @@ namespace RestWithASPNETUdemy.Data.Converter.Implementations
             if (origin == null) return null;
             return new BookVO
             {
-                id = origin.id,
-                NameBook = origin.NameBook,
-                Genre = origin.Genre,
-                Publisher = origin.Publisher,
+                Id = origin.id,
+                Author = origin.Author,
+                LaunchDate = origin.LaunchDate,
+                Price = origin.Price,
+                Title = origin.Title
             };
         }
+
         public List<Book> Parse(List<BookVO> origin)
         {
             if (origin == null) return null;

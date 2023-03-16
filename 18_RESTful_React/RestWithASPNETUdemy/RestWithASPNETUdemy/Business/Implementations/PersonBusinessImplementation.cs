@@ -23,7 +23,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
 
         public PersonVO FindById(long id)
         {
-            return _converter.Parse(_repository.FindById(id));
+            return _converter.Parse(_repository.FindByID(id));
         }
 
         public PersonVO Update(PersonVO person)

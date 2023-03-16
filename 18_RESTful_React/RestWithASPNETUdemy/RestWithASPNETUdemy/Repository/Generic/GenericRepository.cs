@@ -16,18 +16,16 @@ namespace RestWithASPNETUdemy.Repository.Generic
             _context = contex;
             dataset = _context.Set<T>();
         }
-
-      
-
         public List<T> FindAll()
         {
             return dataset.ToList();
         }
 
-        public T FindById(long id)
+        public T FindByID(long id)
         {
             return dataset.SingleOrDefault(p => p.id.Equals(id));
         }
+
         public T Create(T item)
         {
             try
@@ -40,12 +38,10 @@ namespace RestWithASPNETUdemy.Repository.Generic
             {
                 throw;
             }
-          
         }
+
         public T Update(T item)
         {
-            if (!Exists(item.id)) return null;
-
             var result = dataset.SingleOrDefault(p => p.id.Equals(item.id));
             if (result != null)
             {
@@ -53,7 +49,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
                 {
                     _context.Entry(result).CurrentValues.SetValues(item);
                     _context.SaveChanges();
-                    return item;
+                    return result;
                 }
                 catch (Exception)
                 {
@@ -64,14 +60,13 @@ namespace RestWithASPNETUdemy.Repository.Generic
             {
                 return null;
             }
-
         }
+
         public void Delete(long id)
         {
             var result = dataset.SingleOrDefault(p => p.id.Equals(id));
             if (result != null)
             {
-
                 try
                 {
                     dataset.Remove(result);
@@ -81,9 +76,9 @@ namespace RestWithASPNETUdemy.Repository.Generic
                 {
                     throw;
                 }
-
             }
-        } 
+        }
+
         public bool Exists(long id)
         {
             return dataset.Any(p => p.id.Equals(id));
@@ -96,11 +91,11 @@ namespace RestWithASPNETUdemy.Repository.Generic
 
         public int GetCount(string query)
         {
-            var result= "";
-            using(var connection = _context.Database.GetDbConnection())
+            var result = "";
+            using (var connection = _context.Database.GetDbConnection())
             {
                 connection.Open();
-                using(var command = connection.CreateCommand())
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     result = command.ExecuteScalar().ToString();

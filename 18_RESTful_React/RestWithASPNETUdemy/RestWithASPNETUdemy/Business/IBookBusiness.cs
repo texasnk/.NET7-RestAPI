@@ -1,4 +1,5 @@
 ﻿using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Hypermedia.Utils;
 using RestWithASPNETUdemy.Model;
 
 namespace RestWithASPNETUdemy.Business
@@ -7,10 +8,11 @@ namespace RestWithASPNETUdemy.Business
 
     {
         BookVO Create(BookVO book);
-        BookVO Update(BookVO book);
-        BookVO FindById(long id);
-        void Delete(long id);
-
+        BookVO FindByID(long id);
         List<BookVO> FindAll();
+        PagedSearchVO<BookVO> FindWithPagedSearch(
+            string title, string sortDirection, int pageSize, int page);
+        BookVO Update(BookVO book);
+        void Delete(long id);
     }
 }
