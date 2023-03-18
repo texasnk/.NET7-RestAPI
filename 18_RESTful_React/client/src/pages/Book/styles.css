@@ -1,0 +1,99 @@
+.book-container{
+    width: 100%;
+    max-width: 1180px;
+    padding: 0 30px;
+    margin: 32px auto;
+
+}
+
+.book-container header{
+    display: flex;
+    align-items: center;
+}
+
+.book-container header span{
+    font-size: 20px;
+    margin-left: 24px;
+}
+
+.book-container header span strong{
+    color: var(--app-color);
+}
+
+.book-container header img{
+    height: 64px;
+}
+
+.book-container header a{
+    width: 260px;
+    margin-left: auto;
+    margin-top: 0;
+}
+
+.book-container header button{
+    height: 60px;
+    width: 60px;
+    border-radius: 4px;
+    border: none;
+    background:  transparent;
+    margin-left: 16px;
+    transition: 0.5s;
+    color: var(--app-color);
+}
+
+.book-container header button:hover{
+
+    opacity: 0.5;
+
+}
+
+.book-container h1{
+    margin-top: 80px;
+    margin-bottom: 24px;
+
+}
+
+.book-container ul{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 24px;
+    list-style: none;
+
+}
+
+.book-container li{
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.book-container li button{
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    border: 0;
+    transition: 0.3s;
+    color: var(--app-color);
+    background: transparent;
+}
+.book-container li button + button{
+    top: 50px;
+}
+.book-container li button:hover{
+    opacity: 0.5;
+}
+.book-container li strong{
+    display:block;
+    margin-bottom: 13px;
+    color: #41414d;
+}
+.book-container li p + strong{
+    margin-top: 32px;
+}
+
+.book-container li p{
+    color: #737380;
+    line-height: 10px;
+    font-size: 16px;
+}
