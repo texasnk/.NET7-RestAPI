@@ -1,9 +1,10 @@
 .book-container{
     width: 100%;
     max-width: 1180px;
-    padding: 0 30px;
+    padding: 50px;
+    border-radius: 15px;
     margin: 32px auto;
-
+    box-shadow: 0 0 100px rgba(0,0,0,0.2);
 }
 
 .book-container header{
@@ -94,6 +95,6 @@
 
 .book-container li p{
     color: #737380;
-    line-height: 10px;
+    line-height: 20px;
     font-size: 16px;
 }
